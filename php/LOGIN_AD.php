@@ -29,13 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $usuario = $_POST['username'] ?? '';
     $clave = $_POST['password'] ?? '';
 
+    // **CAMBIOS AQUÍ:** Verificar usuario y contraseña con SHA2
     $stmt = $pdo->prepare("SELECT id_empleado, nombre, contraseña, tipo 
                            FROM empleados 
-                           WHERE usuario = ?");
-    $stmt->execute([$usuario]);
+                           WHERE usuario = ? AND contraseña = SHA2(?, 256)");
+    $stmt->execute([$usuario, $clave]);
     $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user_data && $clave === $user_data['contraseña']) {
+    if ($user_data) {
         if ($user_data['tipo'] === 'administrativo') {
             // Guardamos datos en sesión
             $_SESSION['empleado_id'] = $user_data['id_empleado'];
@@ -106,6 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <p class="footer-text">Cuenta de Administrador</p>
     </div>
 
+    <script src="../JAVA_SCRIPT/JAVA_LOGGIN.js"></script>
 </body>
 
 </html>

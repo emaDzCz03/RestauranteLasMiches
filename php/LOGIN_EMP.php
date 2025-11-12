@@ -36,43 +36,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mensaje = "⚠️ Por favor, complete todos los campos.";
         $mostrarMensaje = true;
     } else {
+        // **CAMBIOS AQUÍ:** Verificar usuario y contraseña con SHA2
         $stmt = $pdo->prepare("SELECT id_empleado, nombre, contraseña, tipo 
                                FROM empleados 
-                               WHERE usuario = ?");
-        $stmt->execute([$usuario]);
+                               WHERE usuario = ? AND contraseña = SHA2(?, 256)");
+        $stmt->execute([$usuario, $clave]);
         $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user_data) {
-            // Verificar contraseña (comparación directa ya que no está encriptada)
-            if ($clave === $user_data['contraseña']) {
+            // Verificar tipo de empleado permitido
+            if ($user_data['tipo'] === 'venta' || $user_data['tipo'] === 'recepcionista') {
 
-                // Verificar tipo de empleado permitido
-                if ($user_data['tipo'] === 'venta' || $user_data['tipo'] === 'recepcionista') {
+                // Guardar datos en sesión
+                $_SESSION['empleado_id'] = $user_data['id_empleado'];
+                $_SESSION['empleado_tipo'] = $user_data['tipo'];
+                $_SESSION['empleado_nombre'] = $user_data['nombre'];
 
-                    // Guardar datos en sesión
-                    $_SESSION['empleado_id'] = $user_data['id_empleado'];
-                    $_SESSION['empleado_tipo'] = $user_data['tipo'];
-                    $_SESSION['empleado_nombre'] = $user_data['nombre'];
-
-                    // Redirigir según el tipo de empleado
-                    if ($user_data['tipo'] === 'venta') {
-                        header("Location: ../DASHBOARD/MENU_VENTAS.html");
-                    } else {
-                        header("Location: ../DASHBOARD/MESAS.html");
-                    }
-                    exit;
-
+                // Redirigir según el tipo de empleado
+                if ($user_data['tipo'] === 'venta') {
+                    header("Location: ../DASHBOARD/MENU_VENTAS.html");
                 } else {
-                    $mensaje = "⚠️ Solo los empleados de ventas o recepcionistas pueden ingresar aquí.";
-                    $mostrarMensaje = true;
+                    header("Location: ../DASHBOARD/MESAS.html");
                 }
+                exit;
 
             } else {
-                $mensaje = "❌ Contraseña incorrecta.";
+                $mensaje = "⚠️ Solo los empleados de ventas o recepcionistas pueden ingresar aquí.";
                 $mostrarMensaje = true;
             }
         } else {
-            $mensaje = "❌ Usuario no encontrado.";
+            $mensaje = "❌ Usuario o contraseña incorrectos.";
             $mostrarMensaje = true;
         }
     }
@@ -132,6 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <p class="footer-text">Cuenta de Empleados de Ventas y Recepcionistas</p>
     </div>
 
+    <script src="../JAVA_SCRIPT/JAVA_LOGGIN.js"></script>
 </body>
 
 </html>

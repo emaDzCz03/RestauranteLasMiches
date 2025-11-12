@@ -38,7 +38,7 @@ CREATE TABLE `detalle_venta` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id_venta`),
   CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,28 @@ INSERT INTO `detalle_venta` VALUES
 (85,76,NULL,'Mezcalina Jamaica',1,NULL,NULL,36.00,NULL),
 (86,77,NULL,'Pizza Cuadrada',1,'chorizo, frijoles, jalapeños, cebolla, jitomate',NULL,370.00,NULL),
 (87,78,NULL,'Hamburguesa de Pollo',1,NULL,NULL,120.00,'sfdgfhjk'),
-(88,79,NULL,'Hamburguesa de Pollo',1,NULL,NULL,120.00,NULL);
+(88,79,NULL,'Hamburguesa de Pollo',1,NULL,NULL,120.00,NULL),
+(89,80,NULL,'Pizza Mediana Sola',1,'pepperoni, jamon, carne, tocino',NULL,142.00,NULL),
+(90,81,NULL,'Chocomilk',1,NULL,NULL,22.00,NULL),
+(91,81,NULL,'Hamburguesa de Lujo',1,NULL,NULL,120.00,NULL),
+(92,82,NULL,'Hamburguesa de Pollo',1,NULL,NULL,120.00,NULL),
+(93,82,NULL,'Chocomilk',1,NULL,NULL,22.00,NULL),
+(94,83,NULL,'Pizza Chica 2x1',1,'chorizo, frijoles, jalapeños, cebolla, jitomate, pepperoni, cebolla',NULL,218.00,NULL),
+(95,83,NULL,'Hamburguesa Doble Carne',1,NULL,NULL,100.00,NULL),
+(96,84,NULL,'Coca-Cola 3L',1,NULL,NULL,38.00,NULL),
+(97,84,NULL,'Coca-Cola 3L',1,NULL,NULL,38.00,NULL),
+(98,85,NULL,'Agua de Jamaica',1,NULL,NULL,25.00,NULL),
+(99,85,NULL,'Pizza Familiar 2x1',1,'chorizo, frijoles, jalapeños, cebolla, jitomate, tocino',NULL,425.00,NULL),
+(100,86,NULL,'Chocomilk',1,NULL,NULL,22.00,NULL),
+(101,86,NULL,'Frapé de Oreo',1,NULL,NULL,38.00,NULL),
+(102,87,NULL,'Coca-Cola 3L',1,NULL,NULL,38.00,NULL),
+(103,87,NULL,'Chocomilk',1,NULL,NULL,22.00,NULL),
+(104,88,NULL,'Hamburguesa de Lujo',1,NULL,NULL,120.00,NULL),
+(105,88,NULL,'Pizza Grande Sola',1,'chorizo, frijoles, jalapeños, cebolla, jitomate',NULL,160.00,NULL),
+(106,88,NULL,'Hamburguesa de Pollo',1,NULL,NULL,120.00,NULL),
+(107,89,NULL,'Alitas Mango Habanero (12pz)',1,NULL,NULL,180.00,NULL),
+(108,90,NULL,'Hamburguesa de Lujo',1,NULL,NULL,120.00,NULL),
+(109,90,NULL,'Agua de Horchata',1,NULL,NULL,25.00,NULL);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +173,7 @@ CREATE TABLE `empleados` (
   `contraseña` varchar(255) NOT NULL,
   PRIMARY KEY (`id_empleado`),
   UNIQUE KEY `usuario` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,10 +183,13 @@ CREATE TABLE `empleados` (
 LOCK TABLES `empleados` WRITE;
 /*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
 INSERT INTO `empleados` VALUES
-(1,'Abner Cruz','venta','abner','12345'),
-(2,'Abner1','administrativo','abner1','12345678'),
-(4,'pancho lopez','recepcionista','pancho','12345pancho'),
-(5,'emmanuel diaaz','venta','emma','123456m');
+(1,'Empleado Eliminado','administrativo','eliminado','12345'),
+(2,'abner','administrativo','abner1','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f'),
+(3,'abner','venta','abner','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
+(4,'pancho','recepcionista','pancho','c111e00dc038b0b7b0f8d40ad6a16f9252a0b298186010e282d12a431a8a9e9a'),
+(5,'emmanuel diaz','venta','emmma','a76de8e358269a41ec4fa5d35442d166753749e8ee02de1cc1f31b1d70ce94bd'),
+(16,'jualian paz','venta','paz','979caf8bcc8e83b42eedbfd04bfcba38201180c03598b278119640078874fd23'),
+(18,'Fermin hernandez','venta','fermin','1e62cf431e39679b64e08bdec70aaeef4d0ae306b4290c63d1b5706681503eb4');
 /*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +257,7 @@ CREATE TABLE `productos` (
   `activo` tinyint(1) DEFAULT 1,
   `cantidad_disponible` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +281,28 @@ INSERT INTO `productos` VALUES
 (12,'Mezcalina Jamaica','Mezcalina Jamaica',36.00,1,1),
 (13,'Pizza Cuadrada','Pizza Cuadrada',370.00,1,1),
 (14,'Hamburguesa de Pollo','Hamburguesa de Pollo',120.00,1,1),
-(15,'Hamburguesa de Pollo','Hamburguesa de Pollo',120.00,1,1);
+(15,'Hamburguesa de Pollo','Hamburguesa de Pollo',120.00,1,1),
+(16,'Pizza Mediana Sola','Pizza Mediana Sola',142.00,1,1),
+(17,'Chocomilk','Chocomilk',22.00,1,1),
+(18,'Hamburguesa de Lujo','Hamburguesa de Lujo',120.00,1,1),
+(19,'Hamburguesa de Pollo','Hamburguesa de Pollo',120.00,1,1),
+(20,'Chocomilk','Chocomilk',22.00,1,1),
+(21,'Pizza Chica 2x1','Pizza Chica 2x1',218.00,1,1),
+(22,'Hamburguesa Doble Carne','Hamburguesa Doble Carne',100.00,1,1),
+(23,'Coca-Cola 3L','Coca-Cola 3L',38.00,1,1),
+(24,'Coca-Cola 3L','Coca-Cola 3L',38.00,1,1),
+(25,'Agua de Jamaica','Agua de Jamaica',25.00,1,1),
+(26,'Pizza Familiar 2x1','Pizza Familiar 2x1',425.00,1,1),
+(27,'Chocomilk','Chocomilk',22.00,1,1),
+(28,'Frapé de Oreo','Frapé de Oreo',38.00,1,1),
+(29,'Coca-Cola 3L','Coca-Cola 3L',38.00,1,1),
+(30,'Chocomilk','Chocomilk',22.00,1,1),
+(31,'Hamburguesa de Lujo','Hamburguesa de Lujo',120.00,1,1),
+(32,'Pizza Grande Sola','Pizza Grande Sola',160.00,1,1),
+(33,'Hamburguesa de Pollo','Hamburguesa de Pollo',120.00,1,1),
+(34,'Alitas Mango Habanero (12pz)','Alitas Mango Habanero (12pz)',180.00,1,1),
+(35,'Hamburguesa de Lujo','Hamburguesa de Lujo',120.00,1,1),
+(36,'Agua de Horchata','Agua de Horchata',25.00,1,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +322,7 @@ CREATE TABLE `retiros_caja` (
   PRIMARY KEY (`id_retiro`),
   KEY `id_empleado` (`id_empleado`),
   CONSTRAINT `retiros_caja_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,21 +332,7 @@ CREATE TABLE `retiros_caja` (
 LOCK TABLES `retiros_caja` WRITE;
 /*!40000 ALTER TABLE `retiros_caja` DISABLE KEYS */;
 INSERT INTO `retiros_caja` VALUES
-(1,1,250.00,'Pago de empleado','2025-07-26 16:37:34'),
-(2,1,10.00,'Compra de insumos','2025-07-27 11:03:21'),
-(3,1,100.00,'Pago de empleado','2025-08-06 13:07:53'),
-(4,1,100.00,'pago de luz','2025-08-11 14:52:11'),
-(5,1,100.00,'Gasto operativo','2025-08-26 15:07:18'),
-(6,1,100.00,'Compra de insumos','2025-09-02 10:48:45'),
-(7,1,200.00,'Pago de empleado','2025-10-02 13:30:54'),
-(8,1,10.00,'Pago de empleado','2025-10-09 14:50:02'),
-(9,1,10.00,'hielo','2025-10-09 14:50:22'),
-(10,1,10.00,'Pago de empleado','2025-10-10 00:15:22'),
-(11,1,10.00,'Pago de empleado','2025-10-10 00:15:25'),
-(12,1,10.00,'Pago de empleado','2025-10-10 00:15:25'),
-(13,1,10.00,'Pago de empleado','2025-10-10 00:15:26'),
-(14,1,10.00,'Pago de empleado','2025-10-10 00:15:30'),
-(15,1,5.00,'Pago de empleado','2025-10-10 00:16:35');
+(16,1,100.00,'Gasto operativo','2025-10-23 17:23:38');
 /*!40000 ALTER TABLE `retiros_caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,7 +358,7 @@ CREATE TABLE `ventas` (
   PRIMARY KEY (`id_venta`),
   KEY `id_empleado` (`id_empleado`),
   CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +443,18 @@ INSERT INTO `ventas` VALUES
 (76,1,'local','Cliente no identificado',NULL,NULL,36.00,NULL,'2025-10-16 10:40:53','transferencia',NULL),
 (77,1,'local','Cliente no identificado',NULL,NULL,370.00,NULL,'2025-10-16 10:46:30','transferencia',NULL),
 (78,1,'local','Cliente no identificado',NULL,NULL,120.00,NULL,'2025-10-19 18:14:44','transferencia',NULL),
-(79,1,'local','Cliente no identificado',NULL,NULL,120.00,NULL,'2025-10-19 18:15:40','transferencia',NULL);
+(79,1,'local','Cliente no identificado',NULL,NULL,120.00,NULL,'2025-10-19 18:15:40','transferencia',NULL),
+(80,1,'local','Cliente no identificado',NULL,NULL,142.00,NULL,'2025-10-22 23:28:24','efectivo',NULL),
+(81,1,'local','Cliente no identificado',NULL,NULL,142.00,NULL,'2025-10-23 17:23:15','efectivo',NULL),
+(82,1,'local','Cliente no identificado',NULL,NULL,142.00,NULL,'2025-10-23 17:25:25','efectivo',NULL),
+(83,2,'local','Cliente no identificado',NULL,NULL,318.00,NULL,'2025-10-23 17:42:22','transferencia',NULL),
+(84,1,'local','Cliente no identificado',NULL,NULL,76.00,NULL,'2025-10-23 17:44:29','transferencia',NULL),
+(85,2,'local','Cliente no identificado',NULL,NULL,450.00,NULL,'2025-10-23 17:45:43','efectivo',NULL),
+(86,2,'local','Cliente no identificado',NULL,NULL,60.00,NULL,'2025-10-23 17:50:39','transferencia',NULL),
+(87,2,'local','Cliente no identificado',NULL,NULL,60.00,NULL,'2025-10-27 11:11:28','efectivo',NULL),
+(88,2,'local','Cliente no identificado',NULL,NULL,400.00,NULL,'2025-10-27 11:13:02','efectivo',NULL),
+(89,2,'local','Cliente no identificado',NULL,NULL,180.00,NULL,'2025-10-27 11:15:21','transferencia',NULL),
+(90,2,'local','Cliente no identificado',NULL,NULL,145.00,NULL,'2025-11-04 13:39:45','efectivo',NULL);
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -425,4 +467,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-10-21 23:09:17
+-- Dump completed on 2025-11-12 14:54:34
