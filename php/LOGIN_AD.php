@@ -10,7 +10,7 @@ header("Expires: 0");
 $host = 'localhost';
 $db = 'pizzeria';
 $user = 'root';
-$pass = 'abner';
+$pass = '1234';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
