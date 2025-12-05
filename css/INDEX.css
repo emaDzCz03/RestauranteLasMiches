@@ -527,3 +527,19 @@ footer::before {
     transform: scale(1.1);
     background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
+
+.confeti {
+    position: fixed;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    opacity: 0.9;
+    animation: caer 2s linear forwards;
+}
+
+@keyframes caer {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}

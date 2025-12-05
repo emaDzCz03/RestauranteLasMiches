@@ -30,7 +30,6 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-
 // Procesar creación de empleado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_empleado'])) {
     $nombre = trim($_POST['nombre']);
@@ -135,6 +134,7 @@ function getBadgeClass($tipo)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control de Empleados - Pizzería</title>
     <link rel="stylesheet" href="../CSS/GESTION_EMPLEADOS.css">
+    <link rel="icon" type="image/x-icon" href="../IMAGES/CERVEZIN.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -239,6 +239,19 @@ function getBadgeClass($tipo)
                         <h2><i class="fas fa-list"></i> Lista de Empleados</h2>
                     </div>
                     <div class="card-body">
+                        <!-- Filtro de empleados -->
+                        <div class="filtro-container">
+                            <label for="filtro-tipo" class="filtro-label">
+                                <i class="fas fa-filter"></i> Filtrar por tipo:
+                            </label>
+                            <select id="filtro-tipo" class="filtro-select">
+                                <option value="todos">Todos los empleados</option>
+                                <option value="administrativo">Administrativo</option>
+                                <option value="ventas">Ventas</option>
+                                <option value="recepcionista">Recepcionista</option>
+                            </select>
+                        </div>
+
                         <?php if (empty($empleados)): ?>
                             <div class="empty-state">
                                 <i class="fas fa-users-slash"></i>

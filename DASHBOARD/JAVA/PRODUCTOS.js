@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td>${producto.vendidos || 0}</td>
                         <td>$${(producto.ingresos || 0).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</td>
                         <td>${producto.porcentaje?.toFixed(1) || '0.0'}%</td>
-                        <td>${producto.disponibles !== null ? producto.disponibles : 'N/D'}</td>
                     `;
                     productsBody.appendChild(row);
                 });
@@ -178,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     row.innerHTML = `
                         <td>${venta.id_venta || 'N/A'}</td>
                         <td>${formatDate(venta.fecha)}</td>
-                        <td>${venta.cliente_nombre || 'Sin nombre'}</td>
                         <td>${venta.tipo_venta ? venta.tipo_venta.charAt(0).toUpperCase() + venta.tipo_venta.slice(1) : ''}</td>
                         <td>${venta.metodo_pago ? venta.metodo_pago.charAt(0).toUpperCase() + venta.metodo_pago.slice(1) : ''}</td>
                         <td>$${(venta.total || 0).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</td>
@@ -245,7 +243,6 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="modal-section">
                 <h3><i class="fas fa-info-circle"></i> Información General</h3>
                 <p><strong>Fecha:</strong> ${formatDateTime(detalles.venta?.fecha)}</p>
-                <p><strong>Cliente:</strong> ${detalles.venta?.cliente_nombre || 'No especificado'}</p>
                 <p><strong>Tipo:</strong> ${detalles.venta?.tipo_venta ? detalles.venta.tipo_venta.charAt(0).toUpperCase() + detalles.venta.tipo_venta.slice(1) : ''}</p>
                 <p><strong>Método de pago:</strong> ${detalles.venta?.metodo_pago ? detalles.venta.metodo_pago.charAt(0).toUpperCase() + detalles.venta.metodo_pago.slice(1) : ''}</p>
                 <p><strong>Total:</strong> $${(detalles.venta?.total || 0).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</p>
@@ -402,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 doc.autoTable({
                     startY: 25,
-                    head: [['ID', 'Fecha', 'Cliente', 'Tipo', 'Método Pago', 'Total']],
+                    head: [['ID', 'Fecha', 'Tipo', 'Método Pago', 'Total']],
                     body: ventasData,
                     headStyles: {
                         fillColor: [24, 24, 177],
@@ -424,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const chartCanvas = document.getElementById('productsChart');
             if (chartCanvas) {
                 try {
-                    const chartImage = chartCanvas.toDataURL('image/png');
+                    const chartImage = chartCanvas.toDataURL('./IMAGES/LOGO.png');
                     doc.addPage();
                     doc.setFontSize(14);
                     doc.text('Distribución de Ventas por Producto', 15, 20);

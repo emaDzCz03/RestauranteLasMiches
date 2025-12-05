@@ -542,7 +542,7 @@ function generateTicket(paymentMethod) {
 
     let ticketHTML = `
         <div style="text-align: center; margin-bottom: 15px;">
-            <h2 style="margin: 5px 0;">Pizzería Bella Napoli</h2>
+            <h2 style="margin: 5px 0;">Miches y Pizzeria</h2>
             <p style="margin: 5px 0;">Sistema de Ventas</p>
             <p style="margin: 5px 0;">${dateStr} ${timeStr}</p>
         </div>
@@ -633,5 +633,116 @@ function calculateChange() {
         cashChangeDisplay.textContent = `Cambio: $${change.toFixed(2)}`;
     } else {
         cashChangeDisplay.textContent = `Faltan: $${Math.abs(change).toFixed(2)}`;
+    }
+}
+
+// fuenciones para mostrar la venta de manera emergente abuelo
+
+// Insertar estilos solo una vez
+if (!document.getElementById('sale-popup-styles')) {
+    const styles = document.createElement('style');
+    styles.id = 'sale-popup-styles';
+    styles.textContent = `
+        @keyframes popupFadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes popupFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .sale-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(3px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: popupFadeIn 0.3s ease;
+        }
+
+        .sale-popup {
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            animation: popupFadeIn 0.4s ease;
+        }
+
+        .sale-popup h3 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .sale-popup .icon {
+            font-size: 55px;
+            margin-bottom: 5px;
+            color: #4CAF50;
+        }
+
+        .sale-popup button {
+            margin-top: 15px;
+            padding: 10px 18px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .sale-popup button:hover {
+            background: #43a047;
+        }
+    `;
+    document.head.appendChild(styles);
+}
+
+function showSalePopup(idVenta, total) {
+    // Crear overlay
+    const overlay = document.createElement("div");
+    overlay.className = "sale-popup-overlay";
+
+    // Crear ventana
+    const popup = document.createElement("div");
+    popup.className = "sale-popup";
+
+    popup.innerHTML = `
+        <div class="icon">✔️</div>
+        <h3>Venta Registrada</h3>
+        <p style="margin: 8px 0;"><strong>ID Venta:</strong> ${idVenta}</p>
+        <p style="margin: 8px 0;"><strong>Total:</strong> $${total.toFixed(2)}</p>
+
+        <button id="close-sale-popup">Cerrar</button>
+    `;
+
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+
+    // Cerrar manual
+    popup.querySelector("#close-sale-popup").onclick = () => closePopup();
+    overlay.onclick = (e) => {
+        if (e.target === overlay) closePopup();
+    };
+
+    // Auto-cerrar en 3.5 sec
+    setTimeout(() => closePopup(), 3500);
+
+    function closePopup() {
+        overlay.style.animation = "popupFadeOut 0.3s forwards";
+        popup.style.animation = "popupFadeOut 0.3s forwards";
+
+        setTimeout(() => {
+            if (overlay.parentNode) overlay.remove();
+        }, 300);
     }
 }

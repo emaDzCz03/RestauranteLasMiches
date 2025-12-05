@@ -506,3 +506,50 @@ body {
         padding: 10px 8px;
     }
 }
+
+.filtro-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.filtro-label {
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.filtro-select {
+    padding: 8px 12px;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    min-width: 150px;
+    transition: all 0.3s ease;
+}
+
+.filtro-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Mejoras para la tabla */
+.empleados-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.empleados-table tr {
+    transition: all 0.3s ease;
+}
+
+.empleados-table tr:hover {
+    background-color: #f8f9fa;
+}

@@ -6,22 +6,8 @@ header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// Configuración de conexión
-$host = 'localhost';
-$db = 'pizzeria';
-$user = 'root';
-$pass = '1234';
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+// Incluir el archivo de conexión
+require_once 'CONEXION.php';
 
 $mensaje = 'hello :)';
 
@@ -30,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $clave = $_POST['password'] ?? '';
 
     // **CAMBIOS AQUÍ:** Verificar usuario y contraseña con SHA2
-    $stmt = $pdo->prepare("SELECT id_empleado, nombre, contraseña, tipo 
+    $stmt = $conn->prepare("SELECT id_empleado, nombre, contraseña, tipo 
                            FROM empleados 
                            WHERE usuario = ? AND contraseña = SHA2(?, 256)");
     $stmt->execute([$usuario, $clave]);

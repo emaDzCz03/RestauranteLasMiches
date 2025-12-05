@@ -20,7 +20,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Mostrar mensajes temporales
     mostrarMensajesTemporales();
+
+    // Inicializar filtro de empleados
+    inicializarFiltroEmpleados();
 });
+
+function inicializarFiltroEmpleados() {
+    const filtroTipo = document.getElementById('filtro-tipo');
+    const tablaEmpleados = document.querySelector('.empleados-table tbody');
+
+    if (filtroTipo && tablaEmpleados) {
+        filtroTipo.addEventListener('change', function () {
+            const tipoSeleccionado = this.value.toLowerCase();
+            const filas = tablaEmpleados.querySelectorAll('tr');
+
+            filas.forEach(fila => {
+                const badge = fila.querySelector('.badge');
+                if (badge) {
+                    const tipoEmpleado = badge.textContent.trim().toLowerCase();
+
+                    if (tipoSeleccionado === 'todos' ||
+                        tipoEmpleado === tipoSeleccionado ||
+                        (tipoSeleccionado === 'administrativo' && tipoEmpleado === 'administrativo') ||
+                        (tipoSeleccionado === 'ventas' && tipoEmpleado === 'ventas') ||
+                        (tipoSeleccionado === 'recepcionista' && tipoEmpleado === 'recepcionista')) {
+                        fila.style.display = '';
+                    } else {
+                        fila.style.display = 'none';
+                    }
+                }
+            });
+
+            // Mostrar mensaje si no hay resultados
+            const filasVisibles = Array.from(filas).filter(fila => fila.style.display !== 'none');
+            mostrarOcultarMensajeNoResultados(filasVisibles.length === 0);
+        });
+    }
+}
+
+function mostrarOcultarMensajeNoResultados(mostrar) {
+    let mensajeNoResultados = document.getElementById('mensaje-no-resultados');
+
+    if (mostrar && !mensajeNoResultados) {
+        mensajeNoResultados = document.createElement('tr');
+        mensajeNoResultados.id = 'mensaje-no-resultados';
+        mensajeNoResultados.innerHTML = `
+            <td colspan="5" style="text-align: center; padding: 20px; color: #666;">
+                <i class="fas fa-search"></i> No se encontraron empleados con el filtro aplicado
+            </td>
+        `;
+
+        const tabla = document.querySelector('.empleados-table tbody');
+        if (tabla) {
+            tabla.appendChild(mensajeNoResultados);
+        }
+    } else if (!mostrar && mensajeNoResultados) {
+        mensajeNoResultados.remove();
+    }
+}
 
 function inicializarTooltips() {
     // Inicializar tooltips si se usa alguna librería
@@ -186,6 +243,27 @@ style.textContent = `
         display: flex;
         align-items: center;
         gap: 10px;
+    }
+    
+    .filtro-container {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .filtro-label {
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .filtro-select {
+        padding: 8px 12px;
+        border: 1px solid #e1e8ed;
+        border-radius: 6px;
+        background: white;
+        font-size: 14px;
+        min-width: 150px;
     }
 `;
 document.head.appendChild(style);

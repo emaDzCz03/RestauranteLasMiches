@@ -1,4 +1,5 @@
 <?php
+// DASHBOARD/PHP/CONEXION.php - Configuración compatible con XAMPP
 
 $host = 'localhost';
 $db = 'pizzeria';
@@ -23,7 +24,7 @@ try {
     $conn->query("SELECT 1");
 
 } catch (PDOException $e) {
-
+    // En lugar de die(), podemos lanzar la excepción para que PHPUnit la capture
     throw new PDOException(
         "Error de conexión a la base de datos: " . $e->getMessage() .
         ". Asegúrate de haber ejecutado los comandos SQL de configuración.",

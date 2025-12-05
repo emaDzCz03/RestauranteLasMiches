@@ -6,21 +6,16 @@ header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-$host = 'localhost';
-$db = 'pizzeria';
-$user = 'root';
-$pass = '1234';
-$charset = 'utf8mb4';
+// Evitar redirecciones durante tests PHPUnit
+$is_test_environment = (defined('PHPUNIT_TEST') && PHPUNIT_TEST === true) ||
+    (defined('PREVENT_REDIRECT') && PREVENT_REDIRECT === true);
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+// Incluir el archivo de conexión
+require_once 'CONEXION.php';
 
-try {
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+// Usar la variable PDO de tu conexión
+global $conn;
+$pdo = $conn;
 
 // Inicializar variables
 $mensaje = '';
@@ -36,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mensaje = "⚠️ Por favor, complete todos los campos.";
         $mostrarMensaje = true;
     } else {
-        // **CAMBIOS AQUÍ:** Verificar usuario y contraseña con SHA2
+        // **USANDO PDO:** Verificar usuario y contraseña con SHA2
         $stmt = $pdo->prepare("SELECT id_empleado, nombre, contraseña, tipo 
                                FROM empleados 
                                WHERE usuario = ? AND contraseña = SHA2(?, 256)");
@@ -52,13 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['empleado_tipo'] = $user_data['tipo'];
                 $_SESSION['empleado_nombre'] = $user_data['nombre'];
 
-                // Redirigir según el tipo de empleado
-                if ($user_data['tipo'] === 'venta') {
-                    header("Location: ../DASHBOARD/MENU_VENTAS.html");
-                } else {
-                    header("Location: ../DASHBOARD/MESAS.html");
+                // Solo redirigir si NO estamos en ambiente de test
+                if (!$is_test_environment) {
+                    // Redirigir según el tipo de empleado
+                    if ($user_data['tipo'] === 'venta') {
+                        header("Location: ../DASHBOARD/MENU_VENTAS.html");
+                    } else {
+                        header("Location: ../DASHBOARD/MESAS.html");
+                    }
+                    exit;
                 }
-                exit;
 
             } else {
                 $mensaje = "⚠️ Solo los empleados de ventas o recepcionistas pueden ingresar aquí.";
