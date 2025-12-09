@@ -211,7 +211,7 @@ function actualizarTablaRetiros(retiros) {
     });
 }
 
-// Función para realizar retiros
+// Función para realizar retiros - VERSIÓN CORREGIDA
 async function realizarRetiro() {
     const motivoSelect = document.getElementById('motivo');
     const motivoOtro = document.getElementById('otro-motivo');
@@ -248,8 +248,8 @@ async function realizarRetiro() {
             },
             body: JSON.stringify({
                 motivo: motivo,
-                monto: monto,
-                id_empleado: 2 // Cambiar por ID real del empleado
+                monto: monto
+                // NOTA: NO enviamos id_empleado, se toma automáticamente de la sesión en PHP
             })
         });
 
@@ -258,6 +258,7 @@ async function realizarRetiro() {
         if (data.success) {
             mostrarNotificacion('Retiro registrado correctamente', 'success');
             document.getElementById('form-retiro').reset();
+            document.getElementById('otro-motivo-container').style.display = 'none';
             cargarDatosDelDia(); // Recargar datos
         } else {
             throw new Error(data.message || 'Error al registrar el retiro');

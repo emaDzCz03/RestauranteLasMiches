@@ -8,7 +8,7 @@ header("Expires: 0");
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['empleado_id'])) {
-    header("Location: login.php");
+    header("Location: ERRORPERMISOS.PHP");
     exit;
 }
 
