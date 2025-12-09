@@ -58,15 +58,9 @@ const products = {
         { name: "Azulito frost", image: "IMAGES/BEBIDAS/AZULITO_FROST.png", price: 120 },
         { name: "Azulito Saurio", image: "IMAGES/BEBIDAS/AZULITO_SAURIO.png", price: 130 },
         { name: "Azulito Smash", image: "IMAGES/BEBIDAS/AZULITO_SMASH.png", price: 130 }
-    ],
-
-
-    extras: [
-        { name: "Alitas BBQ (12pz)", price: 180, image: "img/alitas-bbq.jpg" },
-        { name: "Alitas Mango Habanero (12pz)", price: 180, image: "img/alitas-mango.jpg" },
-        { name: "Papas a la Francesa Chicas", price: 30, image: "img/papas-chicas.jpg" },
-        { name: "Papas a la Francesa Grandes", price: 50, image: "img/papas-grandes.jpg" }
     ]
+
+
 };
 
 const pizzaSpecialties = {

@@ -25,8 +25,8 @@ if (isset($_GET['logout'])) {
     session_unset(); // Limpia las variables de sesión
     session_destroy(); // Destruye la sesión
 
-    // Redirigir al login de administrador
-    header("Location: http://localhost/PIZZERIA_MICHES/PHP/LOGIN_AD.PHP");
+    // Redirigir al index
+    header("Location: ../../");
     exit();
 }
 

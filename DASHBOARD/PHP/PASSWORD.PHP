@@ -100,11 +100,10 @@ function validarFortalezaPassword($password)
                 <p>Panel de Control</p>
             </div>
             <ul class="menu">
-                <li><a href="http://localhost/PIZZERIA_MICHES/DASHBOARD/MENU_VENTAS.HTML"><i class="fas fa-home"></i>
-                        Inicio</a></li>
+
                 <li class="active"><a href="#"><i class="fas fa-key"></i> Cambiar Contraseña</a></li>
                 <li>
-                    <a href="http://localhost/PIZZERIA_MICHES/PHP/LOGIN_EMP.PHP">
+                    <a href="../../">
                         <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                     </a>
                 </li>
