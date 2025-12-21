@@ -4,7 +4,7 @@
 $host = 'localhost';
 $db = 'pizzeria';
 $user = 'root';
-$pass = 'abner';
+$pass = '1234';
 $charset = 'utf8mb4';
 
 $options = [
