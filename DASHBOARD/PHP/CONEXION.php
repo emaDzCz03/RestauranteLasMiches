@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$db = 'pizzeria';
+$db = 'res';
 $user = 'root';
 $pass = '1234';
 $charset = 'utf8mb4';

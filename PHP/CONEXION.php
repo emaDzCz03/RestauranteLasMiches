@@ -2,7 +2,7 @@
 // DASHBOARD/PHP/CONEXION.php - Configuración compatible con XAMPP
 
 $host = 'localhost';
-$db = 'pizzeria';
+$db = 'res';
 $user = 'root';
 $pass = '1234';
 $charset = 'utf8mb4';
